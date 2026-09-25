@@ -1,0 +1,26 @@
+[worldserver]
+
+########################################
+# mod-accountwide-pets
+#
+# A companion (non-combat) pet learned by one character is taught to every other character on the
+# same account the next time they log in. Bots are ignored.
+########################################
+
+#
+#    AccountWidePets.Enable
+#        Description: Master switch.
+#        Default:     1
+#
+
+AccountWidePets.Enable = 1
+
+#
+#    AccountWidePets.RespectItemRestrictions
+#        Description: Only teach a pet to characters that could use the item it comes from, so
+#                     faction-only pets stay on their faction. 0 shares every pet with every
+#                     character.
+#        Default:     1
+#
+
+AccountWidePets.RespectItemRestrictions = 1
