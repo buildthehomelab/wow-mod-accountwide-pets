@@ -25,6 +25,16 @@ say.
 Bots from mod-playerbots are skipped both ways: they don't add pets to their account and don't
 get taught any.
 
+## Requirements
+
+- AzerothCore wotlk (master) with the WotLK 3.3.5a (12340) client.
+- No client patch or addon. The table is created in the characters database automatically.
+- Works with [mod-individual-progression](https://github.com/ZhengPeiRu21/mod-individual-progression),
+  which is the reason this is split out of mod-accountwide.
+- Optional: [mod-playerbots](https://github.com/mod-playerbots/mod-playerbots). Bots are skipped
+  whether or not it is installed; the module detects them with `WorldSession::IsHeadless()` when
+  the core has it.
+
 ## Install
 
 Clone it into your AzerothCore `modules` folder **as `mod-accountwide-pets`**, without the repo's
@@ -65,6 +75,24 @@ it logs in, so the list fills up as you play your characters.
 - **Logout:** saves once more.
 - **Deleting the account's last character:** the account's pet list is cleared.
 
+## Troubleshooting
+
+- **The table was not created.** It is added by an update file in the characters database, which
+  only runs while `Updates.EnableDatabases` includes the characters database (it does by default).
+- **An alt did not get a pet.** Pets for the other faction are skipped while the restriction setting
+  is on, and hunter pets and warlock demons are never shared. Each character adds its own pets to
+  the account when it logs in, so log in on the character that has them first, then on your alts.
+- **Two modules are doing the same job.** If mod-accountwide is still installed, remove it or set
+  `AccountWide.Pets = 0` in its config.
+- **To share everything regardless of faction.** Set `AccountWidePets.RespectItemRestrictions = 0`.
+
+## Credits
+
+Based on [warblups/mod-accountwide](https://github.com/warblups/mod-accountwide) by warblups, which
+this is split out of.
+
+Author: [buildthehomelab](https://github.com/buildthehomelab)
+
 ## License
 
-GNU AGPL v3, the same as mod-accountwide, which this is based on. See `LICENSE`.
+GNU AGPL v3, the same as mod-accountwide, which this is based on. See [LICENSE](LICENSE).
