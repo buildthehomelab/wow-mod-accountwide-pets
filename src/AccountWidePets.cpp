@@ -28,6 +28,13 @@
 #include <unordered_map>
 #include <utility>
 
+// A core with home screens keeps a character row per account that nobody plays. Other cores have none.
+#if __has_include("HomeViewer.h")
+#include "HomeViewer.h"
+#else
+#define SQL_NOT_HOME_VIEWER "1"
+#endif
+
 namespace
 {
     struct Config
@@ -273,7 +280,7 @@ public:
             return;
 
         QueryResult result = CharacterDatabase.Query(
-            "SELECT 1 FROM `characters` WHERE `account` = {} AND `guid` <> {} AND `deleteDate` IS NULL LIMIT 1",
+            "SELECT 1 FROM `characters` WHERE `account` = {} AND `guid` <> {} AND `deleteDate` IS NULL AND " SQL_NOT_HOME_VIEWER " LIMIT 1",
             accountId, guid.GetCounter());
         if (result)
             return;
